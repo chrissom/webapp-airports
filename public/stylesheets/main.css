@@ -1,0 +1,31 @@
+
+/* Style */
+/* --- */
+
+nav.nav {
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+section.section {
+    padding: 1.5rem 0.75rem;
+}
+
+ul.list-inline li {
+    display: inline;
+    padding: 2px ;
+    margin: 0;
+}
+
+
+
+.example {
+    font-size: 80%;
+    opacity: .7;
+}
+
+/* Helpers */
+/* --- */
+
+.text-center {
+    text-align: center;
+}

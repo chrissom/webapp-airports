@@ -1,20 +1,52 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
+@()
 
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Webapp Airports") {
+@main("Index") {
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @play20.welcome(message, style = "Scala")
+    <nav class="nav">
+        <div class="nav-left">
+            <a class="nav-item" href="@routes.AppController.index()">
+                Airport
+            </a>
+        </div>
+        <div class="nav-right">
+            <div class="nav-item">
+                <a class="button is-primary is-outlined" href="@routes.AppController.report()">Reports</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="section" style="margin-top: 100px;">
+        <div class="container">
+
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+
+                    <div class="field has-addons">
+                        <form action="/search" method="get" style="width: 100%">
+                            <div class="field is-grouped">
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" id="query" name="q" placeholder="Airport name or code" value="" autofocus required>
+                                </p>
+                                <p class="control">
+                                    <button class="button is-primary" type="submit">Search</button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="example" id="example">
+                        <ul class="list-inline">
+                            <li><a href="#">United States</a></li>
+                            <li><a href="#">Canada</a></li>
+                            <li><a href="#">France</a></li>
+                            <li><a href="#">Germany</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 }

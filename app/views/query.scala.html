@@ -1,0 +1,30 @@
+@(query: Option[String], airports: Vector[(Airport, Vector[Runway])])
+
+@main("Query") {
+
+    @partials.navbar(query)
+
+    <section class="section">
+        <div class="container is-fluid">
+
+            <table class="table is-striped">
+                <thead>
+                    <tr>
+                        <th>Airport</th>
+                        <th>Runway</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @airports.map { t =>
+                    <tr>
+                        <td>@t._1.name</td>
+                        <td>@t._2.map(_.leIdent).mkString(", ")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+}

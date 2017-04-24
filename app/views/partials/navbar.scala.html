@@ -1,0 +1,25 @@
+@(query: Option[String] = None)
+
+<nav class="nav">
+    <div class="nav-left">
+        <a class="nav-item" href="@routes.AppController.index()">
+            Airport
+        </a>
+        <div class="nav-item">
+            <form action="">
+                <div class="field is-grouped">
+                    <p class="control">
+                        <input class="input" type="text" name="q" placeholder="Airport name or code" value="@query" autofocus required>
+                        <button class="button is-primary" type="submit">Search</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="nav-right">
+        <div class="nav-item">
+            <a class="button is-primary is-outlined" href="@routes.AppController.report()">Reports</a>
+        </div>
+    </div>
+</nav>
+
