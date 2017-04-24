@@ -19,7 +19,8 @@ class Reports @Inject()(airports: Airports, countries: Countries, runways: Runwa
   type AirportCode = String
   type AirportList = Vector[Airport]
 
-  type TopCountries = Vector[(AirportCode, AirportList)]
+  type TopCountry = (AirportCode, AirportList)
+  type TopCountries = Vector[TopCountry]
 
   private val sortedAirportsData: Future[TopCountries] = {
     airports.data.map(d =>
@@ -28,9 +29,9 @@ class Reports @Inject()(airports: Airports, countries: Countries, runways: Runwa
   }
 
   // 10 countries with highest number of airports (with count)
-  // TODO
+  val top10countries: Future[TopCountries] = sortedAirportsData.map(airports => airports.reverse.take(10))
 
   // 10 countries with lowest number of airports (with count)
-  // TODO
+  val bottom10countries: Future[TopCountries] = sortedAirportsData.map(airports => airports.take(10))
 
 }

@@ -15,7 +15,7 @@ import scala.concurrent.Future
  * App controller.
  */
 @Singleton
-class AppController @Inject()(countries: Countries, airports: Airports) extends Controller {
+class AppController @Inject()(countries: Countries, airports: Airports, reports: Reports) extends Controller {
 
   def index = Action {
     Ok(views.html.index())
@@ -24,7 +24,7 @@ class AppController @Inject()(countries: Countries, airports: Airports) extends 
   def query(query: Option[String] = None) = Action.async {
     val dataEmpty = Vector.empty[(Airport, Vector[Runway])]
 
-    val data = query match {
+    val data: Future[Vector[(Airport, Vector[Runway])]] = query match {
       case None => Future.successful(dataEmpty)
       case Some(q) =>
         countries.find(q).flatMap {
@@ -36,8 +36,13 @@ class AppController @Inject()(countries: Countries, airports: Airports) extends 
     data.map(d => Ok(views.html.query(query, d)))
   }
 
-  def report = Action {
-    Ok(views.html.report())
+  def report = Action.async {
+    for {
+      top10 <- reports.top10countries
+      bottom10 <- reports.bottom10countries
+    } yield {
+      Ok(views.html.report(top10, bottom10))
+    }
   }
 
 }
